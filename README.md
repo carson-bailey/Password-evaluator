@@ -1,4 +1,3 @@
-# Password-evaluator
 # Password Entropy Evaluator
 
 A small, dependency-free web tool that scores a password by its **entropy** — how much randomness it actually contains — rather than just checking a few arbitrary rules like "has a number." It also estimates how long the password would realistically survive against a few different kinds of attacks.
