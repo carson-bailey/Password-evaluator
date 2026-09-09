@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Entropy Evaluator</title>
+  <meta name="description" content="Measure how much entropy is in a password and estimate realistic crack times." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="panel">
+    <header class="panel__header">
+      <h1>Password entropy evaluator</h1>
+      <p class="dek">Type a password to see how much randomness it actually contains, and how long it would realistically hold up.</p>
+    </header>
+
+    <section class="input-row">
+      <input
+        id="password-input"
+        type="password"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Type a password to test"
+        aria-label="Password to evaluate"
+      />
+      <button id="toggle-visibility" type="button" aria-pressed="false">Show</button>
+    </section>
+
+    <section class="reading" aria-live="polite">
+      <div class="reading__number">
+        <span id="bits-value">0.0</span>
+        <span class="unit">bits of entropy</span>
+      </div>
+      <div id="rating-label" class="rating">No password entered</div>
+      <div class="meter" role="presentation">
+        <span class="meter-segment"></span><span class="meter-segment"></span>
+        <span class="meter-segment"></span><span class="meter-segment"></span>
+        <span class="meter-segment"></span><span class="meter-segment"></span>
+        <span class="meter-segment"></span><span class="meter-segment"></span>
+        <span class="meter-segment"></span><span class="meter-segment"></span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Composition</h2>
+        <ul id="composition-list" class="composition"></ul>
+      </div>
+
+      <div class="card" id="warnings-section" style="display:none">
+        <h2>Patterns detected</h2>
+        <ul id="warnings-list" class="warnings"></ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Estimated time to crack</h2>
+      <p class="note">Assumes an attacker knows the password's length and character set but not the password itself, and is guessing at the rate shown.</p>
+      <table class="crack-table">
+        <thead>
+          <tr><th>Attack scenario</th><th>Time</th></tr>
+        </thead>
+        <tbody id="crack-table-body"></tbody>
+      </table>
+    </section>
+
+    <footer class="panel__footer">
+      <p>Nothing typed here leaves your browser — all calculations run locally in JavaScript.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
